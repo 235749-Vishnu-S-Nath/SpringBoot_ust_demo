@@ -46,4 +46,9 @@ public class StudentController {
     public void add(@RequestBody Student student){
         studentService.saveStudent(student);
     }
+
+    @PutMapping("/student")
+    public void update(@RequestBody Student student){
+        studentService.updateStudent(student);
+    }
 }
