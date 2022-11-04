@@ -48,7 +48,13 @@ public class StudentController {
     }
 
     @PutMapping("/student")
-    public void update(@RequestBody Student student){
-        studentService.updateStudent(student);
+    public ResponseEntity<Student> update(@RequestBody Student student){
+        try{
+            Student updatedStudent = studentService.updateStudent(student);
+            return new ResponseEntity<Student>(updatedStudent,HttpStatus.OK);
+        }
+        catch (NoSuchElementException e){
+            return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);
+        }
     }
 }

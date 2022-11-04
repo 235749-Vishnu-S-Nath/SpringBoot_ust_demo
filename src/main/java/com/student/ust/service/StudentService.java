@@ -25,12 +25,13 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public void updateStudent(Student student){
-        Student updateStudent = studentRepository.findById(student.getId()).orElseThrow(()->new NoSuchElementException());
-        updateStudent.setRollNo(student.getRollNo());
-        updateStudent.setName(student.getName());
-        updateStudent.setAge(student.getAge());
-        studentRepository.save(updateStudent);
+    public Student updateStudent(Student student){
+        Student updatedStudent = studentRepository.findById(student.getStudentId()).orElseThrow(()->new NoSuchElementException());
+        updatedStudent.setRollNo(student.getRollNo());
+        updatedStudent.setName(student.getName());
+        updatedStudent.setAge(student.getAge());
+        studentRepository.save(updatedStudent);
+        return updatedStudent;
     }
 
     public void removeStudent(Integer id) {

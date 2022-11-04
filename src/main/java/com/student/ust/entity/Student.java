@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int studentId;
     private int rollNo;
     private String name;
     private int age;
