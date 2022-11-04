@@ -2,6 +2,7 @@ package com.student.ust.controller;
 
 import com.student.ust.entity.Student;
 import com.student.ust.service.StudentService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,12 +12,14 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
+@Slf4j
 public class StudentController {
     @Autowired
     StudentService studentService;
 
     @GetMapping("/student/{id}")
     public ResponseEntity<Student> get(@PathVariable Integer id){
+        log.debug("Id value in get method "+id);
         try{
             Student student = studentService.getStudentById(id);
             return new ResponseEntity<Student>(student, HttpStatus.OK);
@@ -44,6 +47,7 @@ public class StudentController {
 
     @PostMapping("/student")
     public void add(@RequestBody Student student){
+        log.debug("Student details >>>"+student.getStudentId()+" "+student.getName());
         studentService.saveStudent(student);
     }
 
