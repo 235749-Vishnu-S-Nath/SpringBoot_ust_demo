@@ -2,11 +2,8 @@ package com.student.ust.entity;
 
 import lombok.Data;
 import lombok.Generated;
-
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Data

@@ -29,8 +29,8 @@ public class Student {
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Book> bookList;
 
-//    @ManyToMany
-//    @JoinColumn(name="book_id")
-//    private List<Book> book;
+    @ManyToMany
+    @JoinColumn(name="tutor_id")
+    private List<Tutor> tutor;
 
 }
