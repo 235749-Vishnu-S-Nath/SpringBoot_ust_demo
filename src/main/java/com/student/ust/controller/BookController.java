@@ -36,7 +36,7 @@ public class BookController {
     @GetMapping("/book")
     public ResponseEntity<List<Book>> getAll(){
         try{
-            List<Book> bookList = bookService.getAllbooks();
+            List<Book> bookList = bookService.getAllBooks();
             return new ResponseEntity<List<Book>>(bookList, HttpStatus.OK);
         }
         catch(NoSuchElementException e) {

@@ -3,13 +3,14 @@ package com.student.ust.entity;
 import lombok.Data;
 import lombok.Generated;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
+@Table(name = "book_ustBatch")
 public class Book {
 
     @Id
@@ -18,4 +19,11 @@ public class Book {
     private String bookName;
     private String bookAuthorName;
     private int bookIsbNo;
+    private LocalDateTime bookCreatedDate;
+    private LocalDateTime bookModifiedDate;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
+
 }
