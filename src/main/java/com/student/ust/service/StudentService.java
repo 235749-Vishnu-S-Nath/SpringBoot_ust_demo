@@ -5,7 +5,7 @@ import com.student.ust.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -17,7 +17,13 @@ public class StudentService {
     StudentRepository studentRepository;
 
     public Student getStudentById(Integer id) {
-        return studentRepository.findById(id).orElse(null);
+        Student studentById=studentRepository.findById(id).orElseThrow(()-> new NoSuchElementException());
+        //getStudentByName(studentById.getName());
+        //Student student = studentRepository.findByNameStartingWith("Ki");
+        //System.out.println(student.getName());
+        //System.out.println(studentRepository.findStudentByAge(23));
+        return studentById;
+
     }
 
     public void saveStudent(Student student) {
@@ -42,5 +48,11 @@ public class StudentService {
 
     public void removeStudent(Integer id) {
         studentRepository.deleteById(id);
+    }
+
+    public void getStudentByName(String name) {
+        Student studentByName=studentRepository.findByName(name);
+        System.out.println("Student name is ......"+ studentByName.getName());
+        System.out.println("Student age is ......"+ studentByName.getAge());
     }
 }

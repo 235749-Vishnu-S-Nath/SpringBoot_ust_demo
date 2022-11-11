@@ -1,17 +1,16 @@
 package com.student.ust.entity;
 
 import lombok.Data;
-import lombok.Generated;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Table(name = "book_ustBatch")
+@Table(name = "book_ustBatch_table")
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private int bookId;
     private String bookName;
     private String bookAuthorName;

@@ -29,6 +29,17 @@ public class StudentController {
         }
     }
 
+    @GetMapping("/students")
+    public ResponseEntity<Student> getRequest(@RequestParam(name = "id") Integer studentId){
+        try{
+            Student student = studentService.getStudentById(studentId);
+            return new ResponseEntity<Student>(student, HttpStatus.OK);
+        }
+        catch(NoSuchElementException e) {
+            return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/student")
     public ResponseEntity<List<Student>> getAll(){
         try{
@@ -49,16 +60,5 @@ public class StudentController {
     public void add(@RequestBody Student student){
         log.debug("Student details >>>"+student.getStudentId()+" "+student.getName());
         studentService.saveStudent(student);
-    }
-
-    @PutMapping("/student")
-    public ResponseEntity<Student> update(@RequestBody Student student){
-        try{
-            Student updatedStudent = studentService.updateStudent(student);
-            return new ResponseEntity<Student>(updatedStudent,HttpStatus.OK);
-        }
-        catch (NoSuchElementException e){
-            return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);
-        }
     }
 }

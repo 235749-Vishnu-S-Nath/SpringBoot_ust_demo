@@ -1,7 +1,6 @@
 package com.student.ust.entity;
 
 import lombok.Data;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
