@@ -5,6 +5,7 @@ import lombok.NonNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,8 +13,9 @@ import java.util.Set;
 
 @Entity
 @Data
-@Table(name="student_ustBatch_table")
+@Table(name="student_ustBatch_table_demo")
 public class Student {
+    public Student(){}
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private int studentId;
@@ -22,7 +24,6 @@ public class Student {
     private int age;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
-    @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}",flags = Pattern.Flag.CASE_INSENSITIVE)
     @NonNull
     private String email;
     @NonNull
@@ -39,4 +40,5 @@ public class Student {
     @ManyToMany
     @JoinColumn(name="tutor_id")
     private List<Tutor> tutor;
+
 }

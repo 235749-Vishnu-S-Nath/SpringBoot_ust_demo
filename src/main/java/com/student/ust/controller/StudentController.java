@@ -1,6 +1,8 @@
 package com.student.ust.controller;
 
 import com.student.ust.entity.Student;
+import com.student.ust.exception.BusinessException;
+import com.student.ust.exception.InvalidEmail;
 import com.student.ust.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Email;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -57,8 +60,21 @@ public class StudentController {
     }
 
     @PostMapping("/student")
-    public void add(@RequestBody Student student){
+    public ResponseEntity<Student> add(@RequestBody Student student){
         log.debug("Student details >>>"+student.getStudentId()+" "+student.getName());
-        studentService.saveStudent(student);
+        String email = student.getEmail();
+        String password = student.getPassword();
+        try {
+            int resultEmail=studentService.validateEmail(email);
+            int resultPassword=studentService.validatePassword(password);
+            if(resultEmail==0 && resultPassword==0) {
+                student.setPassword(studentService.hashPassword(password));
+                studentService.saveStudent(student);
+            }
+            return new ResponseEntity<Student>(student, HttpStatus.OK);
+        }
+        catch(BusinessException e){
+            return new ResponseEntity<Student>(HttpStatus.PRECONDITION_FAILED);
+        }
     }
 }
