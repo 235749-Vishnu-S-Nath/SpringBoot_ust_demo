@@ -11,15 +11,33 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * The type Tutor controller.
+ */
 @RestController
 public class TutorController {
+    /**
+     * The Tutor service.
+     */
     @Autowired
     TutorService tutorService;
+
+    /**
+     * Add.
+     *
+     * @param tutor the tutor
+     */
     @PostMapping("/tutor")
     public void add(@RequestBody Tutor tutor){
         tutorService.saveTutor(tutor);
     }
 
+    /**
+     * Get response entity.
+     *
+     * @param id the id
+     * @return the response entity
+     */
     @GetMapping("/tutor/{id}")
     public ResponseEntity<Tutor> get(@PathVariable Integer id){
         try{
@@ -30,6 +48,11 @@ public class TutorController {
         }
     }
 
+    /**
+     * Get all response entity.
+     *
+     * @return the response entity
+     */
     @GetMapping("/tutor")
     public ResponseEntity<List<Tutor>> getAll(){
         try{
@@ -41,11 +64,22 @@ public class TutorController {
         }
     }
 
+    /**
+     * Remove.
+     *
+     * @param id the id
+     */
     @DeleteMapping("/tutor/{id}")
     public void remove(@PathVariable Integer id){
         tutorService.removeTutor(id);
     }
 
+    /**
+     * Update response entity.
+     *
+     * @param tutor the tutor
+     * @return the response entity
+     */
     @PutMapping("/tutor")
     public ResponseEntity<Tutor> update(@RequestBody Tutor tutor){
         try{

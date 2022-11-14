@@ -11,10 +11,16 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The type Student.
+ */
 @Entity
 @Data
 @Table(name="student_ustBatch_table_demo")
 public class Student {
+    /**
+     * Instantiates a new Student.
+     */
     public Student(){}
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)

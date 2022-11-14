@@ -4,6 +4,9 @@ import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * The type Book.
+ */
 @Entity
 @Data
 @Table(name = "book_ustBatch_table")

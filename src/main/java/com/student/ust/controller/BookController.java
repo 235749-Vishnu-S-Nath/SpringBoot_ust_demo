@@ -12,17 +12,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * The type Book controller.
+ */
 @RestController
 public class BookController {
 
+    /**
+     * The Book service.
+     */
     @Autowired
     BookService bookService;
 
+    /**
+     * Add.
+     *
+     * @param book the book
+     */
     @PostMapping("/book")
     public void add(@RequestBody Book book){
         bookService.saveBook(book);
     }
 
+    /**
+     * Get response entity.
+     *
+     * @param id the id
+     * @return the response entity
+     */
     @GetMapping("/book/{id}")
     public ResponseEntity<Book> get(@PathVariable Integer id){
         try{
@@ -33,6 +50,11 @@ public class BookController {
         }
     }
 
+    /**
+     * Get all response entity.
+     *
+     * @return the response entity
+     */
     @GetMapping("/book")
     public ResponseEntity<List<Book>> getAll(){
         try{
@@ -44,11 +66,22 @@ public class BookController {
         }
     }
 
+    /**
+     * Remove.
+     *
+     * @param id the id
+     */
     @DeleteMapping("/book/{id}")
     public void remove(@PathVariable Integer id){
         bookService.removeBook(id);
     }
 
+    /**
+     * Update response entity.
+     *
+     * @param book the book
+     * @return the response entity
+     */
     @PutMapping("/book")
     public ResponseEntity<Book> update(@RequestBody Book book){
         try{
