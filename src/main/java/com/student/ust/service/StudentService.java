@@ -1,23 +1,17 @@
 package com.student.ust.service;
 
+import com.student.ust.dto.StudentDTO;
 import com.student.ust.entity.Student;
 import com.student.ust.exception.BusinessException;
-import com.student.ust.exception.InvalidEmail;
-import com.student.ust.exception.InvalidPassword;
 import com.student.ust.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import static com.student.ust.utils.UstUtils.*;
 
 /**
@@ -32,6 +26,9 @@ public class StudentService {
      */
     @Autowired
     StudentRepository studentRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     /**
      * Gets student by id.
@@ -108,7 +105,17 @@ public class StudentService {
      */
     public void getStudentByName(String name) {
         Student studentByName=studentRepository.findByName(name);
-        System.out.println("Student name is ......"+ studentByName.getName());
-        System.out.println("Student age is ......"+ studentByName.getAge());
+    }
+
+    public StudentDTO convertToDto(Student student) {
+        return modelMapper.map(student, StudentDTO.class);
+    }
+
+    public List<StudentDTO> convertToDtoList(List<Student> studentList) {
+        List<StudentDTO> studentDTOList = new ArrayList<>();
+        for(Student student:studentList){
+            studentDTOList.add(modelMapper.map(student,StudentDTO.class));
+        }
+        return studentDTOList;
     }
 }

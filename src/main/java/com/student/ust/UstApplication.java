@@ -1,5 +1,6 @@
 package com.student.ust;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -15,10 +16,13 @@ public class UstApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(UstApplication.class, args);
 	}
-
 	@Bean
 	public Docket studentBookAPId(){
 		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("com.student.ust")).build();
 	}
 
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
 }

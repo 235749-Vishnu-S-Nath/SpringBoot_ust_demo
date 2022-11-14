@@ -1,8 +1,8 @@
 package com.student.ust.controller;
 
+import com.student.ust.dto.StudentDTO;
 import com.student.ust.entity.Student;
 import com.student.ust.exception.BusinessException;
-
 import com.student.ust.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static com.student.ust.utils.UstUtils.*;
 
 /**
  * The type Student controller.
@@ -32,30 +31,30 @@ public class StudentController {
      * @return the response entity
      */
     @GetMapping("/student/{id}")
-    public ResponseEntity<Student> get(@PathVariable Integer id){
+    public ResponseEntity<StudentDTO> get(@PathVariable Integer id){
         try{
             Student student = studentService.getStudentById(id);
-            return new ResponseEntity<Student>(student, HttpStatus.OK);
+            return new ResponseEntity<StudentDTO>(studentService.convertToDto(student), HttpStatus.OK);
         }
         catch(NoSuchElementException e) {
-            return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<StudentDTO>(HttpStatus.NOT_FOUND);
         }
     }
 
-    /**
+     /**
      * Gets request.
      *
      * @param studentId the student id
      * @return the request
      */
     @GetMapping("/students")
-    public ResponseEntity<Student> getRequest(@RequestParam(name = "id") Integer studentId){
+    public ResponseEntity<StudentDTO> getRequest(@RequestParam(name = "id") Integer studentId){
         try{
             Student student = studentService.getStudentById(studentId);
-            return new ResponseEntity<Student>(student, HttpStatus.OK);
+            return new ResponseEntity<StudentDTO>(studentService.convertToDto(student), HttpStatus.OK);
         }
         catch(NoSuchElementException e) {
-            return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<StudentDTO>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -65,13 +64,13 @@ public class StudentController {
      * @return the response entity
      */
     @GetMapping("/student")
-    public ResponseEntity<List<Student>> getAll(){
+    public ResponseEntity<List<StudentDTO>> getAll(){
         try{
             List<Student> studentList = studentService.getAllStudents();
-            return new ResponseEntity<List<Student>>(studentList, HttpStatus.OK);
+            return new ResponseEntity<List<StudentDTO>>(studentService.convertToDtoList(studentList), HttpStatus.OK);
         }
         catch(NoSuchElementException e) {
-            return new ResponseEntity<List<Student>>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<List<StudentDTO>>(HttpStatus.NOT_FOUND);
         }
     }
 
