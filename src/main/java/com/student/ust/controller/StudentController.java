@@ -41,7 +41,7 @@ public class StudentController {
         }
     }
 
-     /**
+    /**
      * Gets request.
      *
      * @param studentId the student id
@@ -78,6 +78,7 @@ public class StudentController {
      * Remove.
      *
      * @param id the id
+     * @return the response entity
      */
     @DeleteMapping("/student/{id}")
     public ResponseEntity<Student> remove(@PathVariable Integer id){

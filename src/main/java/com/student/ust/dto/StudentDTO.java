@@ -3,6 +3,9 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+/**
+ * The type Student dto.
+ */
 @Data
 public class StudentDTO {
     private int studentId;
